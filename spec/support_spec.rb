@@ -32,4 +32,12 @@ describe RSpec::Puppet::Support do
       expect(subject.ref('Package','tomcat').inspect).to eq("Package['tomcat']")
     end
   end
+
+  describe "#sensitive" do
+    it 'should return a new Sensitive with the given contents' do
+      sens = subject.sensitive('test content')
+      expect(sens).to be_sensitive
+      expect(sens.unwrap).to eq 'test content'
+    end
+  end
 end
